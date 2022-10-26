@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Cheper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+    <!-- CSS -->
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            background-color: #6495ED;
+            font-family: 'Varela Round', sans-serif;
+            color: rgb(0, 0, 0);
+        }
+    
+        p {
+            font-size: 20px;
+            font-weight: 400;
+        }
+    </style>
+<body>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-4">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <h3 class="mb-5 h3" style="font-weight: bold;">What's Cheaper?</h3>
+                    <hr class="my-4">
+                    <!-- 1st -->
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                          <label class="col-form-label" style="font-weight: bold; font-size: 2.5vh;" >A</label>
+                        </div>
+                        <div class="col-auto">
+                          <input type="number" id="quantity-a" name="quantity-a" class="form-control" oninput="findCheaper()" placeholder="Quantity" style="width: 7rem;">
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" id="price-a" name="price-a" class="form-control" oninput="findCheaper()" placeholder="Price" style="width: 7rem;">
+                        </div>
+                    </div>
+                    <!-- 2nd -->
+                    <div class="row g-3 align-items-center mb-4">
+                        <div class="col-auto">
+                          <label class="col-form-label" style="font-weight: bold; font-size: 2.5vh;" >B</label>
+                        </div>
+                        <div class="col-auto">
+                          <input type="number" id="quantity-b" name="quantity-b" class="form-control" oninput="findCheaper()" placeholder="Quantity" style="width: 7rem;">
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" id="price-b" name="price-b" class="form-control" oninput="findCheaper()" placeholder="Price" style="width: 7rem;">
+                        </div>
+                    </div>
+                    <!-- Result -->
+                    <span id="result" class="text-decoration-underline"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    <script type="text/javascript">
+        function findCheaper() {
+            var quantityA = document.getElementById("quantity-a").value,
+                quantityB = document.getElementById("quantity-b").value,
+                priceA = document.getElementById("price-a").value,
+                priceB = document.getElementById("price-b").value;
+
+                var rA = quantityA / priceA,
+                    rB = quantityB / priceB,
+                    perDiff = rA - rB == 0 ? 0 : 100 * Math.abs((rA-rB)/rB).toFixed(2);
+                    
+                console.log(rA, "A")
+                console.log(rB, "B")
+                console.log(perDiff, "%")
+                    
+                if (!quantityA || !priceA || !quantityB || !priceB){
+                    document.getElementById("result").innerHTML = ""
+                }
+                else {
+                    if (rA > rB) {
+                    document.getElementById("result").innerHTML = "A is cheaper more than B for "+perDiff+"%"
+                    console.log(1)
+                    }
+                    if (rA < rB) {
+                        document.getElementById("result").innerHTML = "B is cheaper more than A for "+perDiff+"%"
+                        console.log(2)
+                    }
+                    if (rA == rB) {
+                        document.getElementById("result").innerHTML = "SAME !"
+                        console.log(3)
+                    }
+                }
+        }
+        
+    </script>
+</body>
+</html>
